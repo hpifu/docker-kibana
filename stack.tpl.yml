@@ -1,0 +1,23 @@
+version: "3.5"
+services:
+  kibana:
+    hostname: kibana
+    image: hatlonely/kibana:${version}
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "5601:5601"
+    volumes:
+      - "/var/docker/kibana/log:/usr/share/kibana/logs"
+      - "/var/docker/kibana/data:/usr/share/kibana/data"
+    networks:
+      - kibananet
+      - elasticsearchnet
+networks:
+  kibananet:
+    name: kibananet
+  elasticsearchnet:
+    external: true
+    name: elasticsearchnet
