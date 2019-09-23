@@ -5,10 +5,10 @@ user=hatlonely
 .PHONY: deploy remove build push
 
 deploy:
-	mkdir -p ${HOME}/var/docker/${repository}/data
-	mkdir -p ${HOME}/var/docker/${repository}/log
-	chown -R 1000:1000 ${HOME}/var/docker/${repository}/data
-	chown -R 1000:1000 ${HOME}/var/docker/${repository}/log
+	mkdir -p /var/docker/${repository}/data
+	mkdir -p /var/docker/${repository}/log
+	chown -R 1000:1000 /var/docker/${repository}/data
+	chown -R 1000:1000 /var/docker/${repository}/log
 	docker stack deploy -c stack.yml ${repository}
 
 remove:
