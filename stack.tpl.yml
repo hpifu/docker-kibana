@@ -2,7 +2,7 @@ version: "3.5"
 services:
   kibana:
     hostname: kibana
-    image: hatlonely/kibana:${version}
+    image: kibana:7.3.2
     deploy:
       replicas: 1
       restart_policy:
@@ -15,6 +15,12 @@ services:
     networks:
       - kibananet
       - elasticsearchnet
+    environment:
+      - "server.name=kibana"
+      - "server.host=0"
+      - 'elasticsearch.hosts=[ "http://elasticsearch:9200" ]'
+      - "xpack.monitoring.ui.container.elasticsearch.enabled=true"
+
 networks:
   kibananet:
     name: kibananet
