@@ -12,18 +12,14 @@ services:
     volumes:
       - "/var/docker/kibana/log:/usr/share/kibana/logs"
       - "/var/docker/kibana/data:/usr/share/kibana/data"
-    networks:
-      - kibananet
-      - elasticsearchnet
     environment:
       - "server.name=kibana"
       - "server.host=0"
       - 'elasticsearch.hosts=[ "http://elasticsearch:9200" ]'
       - "xpack.monitoring.ui.container.elasticsearch.enabled=true"
-
+    networks:
+      - online
 networks:
-  kibananet:
-    name: kibananet
-  elasticsearchnet:
+  online:
     external: true
-    name: elasticsearchnet
+    name: online
